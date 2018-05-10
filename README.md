@@ -1,4 +1,4 @@
-![truegin](https://i.imgur.com/R2YTxiX.png "truegin")
+![truegin](https://i.imgur.com/xT0hVIn.png)
 
 [![Travis](https://img.shields.io/travis/jsdevtom/truegin.svg)](https://travis-ci.org/jsdevtom/truegin)
 [![Coveralls](https://img.shields.io/coveralls/jsdevtom/truegin.svg)](https://coveralls.io/github/jsdevtom/truegin)
