@@ -83,15 +83,15 @@ export default class Almanac {
         if (path) {
             return factValuePromise.then(factValue => {
                 if (factValue && isObjectLike(factValue)) {
-                    let pathValue = (selectn(path) as Function)(factValue)
+                    let pathValue = selectn<Function>(path)!(factValue)
                     debug(
-            `condition::evaluate extracting object property ${path}, received: ${pathValue}`,
-          )
+                        `condition::evaluate extracting object property ${path}, received: ${pathValue}`,
+                    )
                     return pathValue
                 } else {
                     warn(
-            `condition::evaluate could not compute object path(${path}) of non-object: ${factValue} <${typeof factValue}>; continuing with ${factValue}`,
-          )
+                        `condition::evaluate could not compute object path(${path}) of non-object: ${factValue} <${typeof factValue}>; continuing with ${factValue}`,
+                    )
                     return factValue
                 }
             })
