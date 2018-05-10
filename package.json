@@ -14,7 +14,7 @@
     "type": "git",
     "url": ""
   },
-  "license": "MIT",
+  "license": "ISC",
   "engines": {
     "node": ">=6.0.0"
   },
