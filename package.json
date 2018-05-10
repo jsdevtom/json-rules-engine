@@ -1,73 +1,92 @@
 {
-  "name": "json-rules-engine",
-  "version": "2.3.0",
-  "description": "Rules Engine expressed in simple json",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "mocha && npm run lint --silent",
-    "lint": "standard --verbose | snazzy || true",
-    "lint:fix": "standard --fix",
-    "prepublishOnly": "npm run build",
-    "build": "babel --stage 1 -d dist/ src/"
-  },
+  "name": "truegin",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "dist/truegin.umd.js",
+  "module": "dist/truegin.es5.js",
+  "typings": "dist/types/truegin.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "Tom <contact@jsdevtom.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cachecontrol/json-rules-engine"
+    "url": ""
   },
-  "keywords": [
-    "rules",
-    "engine",
-    "rules engine"
-  ],
-  "standard": {
-    "parser": "babel-eslint",
-    "ignore": [
-      "/dist"
-    ],
-    "globals": [
-      "context",
-      "xcontext",
-      "describe",
-      "xdescribe",
-      "it",
-      "xit",
-      "before",
-      "beforeEach",
-      "expect",
-      "factories"
-    ]
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0"
   },
-  "author": "Cache Hamm <cache.hamm@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cachecontrol/json-rules-engine/issues"
+  "scripts": {
+    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "lint:fix": "npm run lint -- --fix",
+    "prebuild": "rimraf dist",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "start": "rollup -c rollup.config.ts -w",
+    "test": "jest --config=jest.config.js",
+    "test:watch": "jest --config=jest.config.js --watch",
+    "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+    "deploy-docs": "ts-node tools/gh-pages-publish",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release",
+    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
+    "precommit": "npm run lint:fix"
   },
-  "homepage": "https://github.com/cachecontrol/json-rules-engine",
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
+    "validate-commit-msg": {
+      "types": "conventional-commit-types",
+      "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
+    }
+  },
   "devDependencies": {
-    "babel-cli": "6.26.0",
-    "babel-core": "6.26.0",
-    "babel-eslint": "8.0.2",
-    "babel-loader": "7.1.2",
-    "babel-polyfill": "6.26.0",
-    "babel-preset-es2015": "~6.24.1",
-    "babel-preset-stage-0": "~6.24.1",
-    "babel-register": "6.26.0",
-    "chai": "^4.1.2",
-    "chai-as-promised": "^7.1.1",
-    "colors": "~1.1.2",
-    "dirty-chai": "2.0.1",
-    "mocha": "^5.0.5",
+    "@types/clone": "^0.1.30",
+    "@types/debug": "0.0.30",
+    "@types/jest": "^22.0.0",
+    "@types/lodash.isobjectlike": "^4.0.3",
+    "@types/node": "^9.3.0",
+    "@types/object-hash": "^1.2.0",
+    "colors": "^1.1.2",
+    "commitizen": "^2.9.6",
+    "coveralls": "^3.0.0",
+    "cross-env": "^5.0.1",
+    "cz-conventional-changelog": "^2.0.0",
+    "husky": "^0.14.0",
+    "jest": "^22.0.2",
+    "lint-staged": "^7.0.0",
+    "lodash.camelcase": "^4.3.0",
     "perfy": "^1.1.2",
-    "sinon": "^4.1.2",
-    "sinon-chai": "^2.14.0",
-    "snazzy": "^7.0.0",
-    "standard": "^10.0.3"
+    "prettier": "^1.4.4",
+    "prompt": "^1.0.0",
+    "replace-in-file": "^3.0.0-beta.2",
+    "rimraf": "^2.6.1",
+    "rollup": "^0.57.0",
+    "rollup-plugin-commonjs": "^9.0.0",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-typescript2": "^0.11.1",
+    "semantic-release": "^15.0.0",
+    "ts-jest": "^22.4.4",
+    "ts-node": "^6.0.0",
+    "tslint": "^5.8.0",
+    "tslint-config-prettier": "^1.1.0",
+    "tslint-config-standard": "^7.0.0",
+    "tslint-eslint-rules": "^5.1.0",
+    "typedoc": "^0.11.0",
+    "typescript": "^2.6.2",
+    "validate-commit-msg": "^2.12.2"
   },
   "dependencies": {
     "clone": "^2.1.1",
     "debug": "^3.1.0",
+    "idx": "^2.3.0",
     "lodash.isobjectlike": "^4.0.0",
-    "object-hash": "^1.2.0",
+    "object-hash": "^1.3.0",
     "selectn": "^1.1.2"
   }
 }
