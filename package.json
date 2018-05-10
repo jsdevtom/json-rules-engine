@@ -32,7 +32,8 @@
     "commit": "git-cz",
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
-    "precommit": "npm run lint:fix"
+    "precommit": "npm run lint:fix",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "config": {
     "commitizen": {
@@ -79,7 +80,8 @@
     "tslint-eslint-rules": "^5.1.0",
     "typedoc": "^0.11.0",
     "typescript": "^2.6.2",
-    "validate-commit-msg": "^2.12.2"
+    "validate-commit-msg": "^2.12.2",
+    "travis-deploy-once": "^5.0.0"
   },
   "dependencies": {
     "clone": "^2.1.1",
