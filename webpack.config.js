@@ -24,7 +24,7 @@ module.exports = {
         new UglifyJsPlugin({
             sourceMap: true,
             include: /\.min\.js$/,
-        })
+        }),
     ],
     output: {
         path: path.resolve(__dirname, 'dist/_bundles'),
