@@ -3,7 +3,7 @@ import json_rules_engine, {
   Rule,
   Operator,
   Engine,
-} from './json-rules-engine'
+} from './truegin'
 
 export default json_rules_engine
 export { Fact, Rule, Operator, Engine }
