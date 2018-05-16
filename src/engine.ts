@@ -1,5 +1,5 @@
 import {Fact, FactOptions} from './fact'
-import {Rule} from './rule'
+import {Rule, RuleConstructorOptions} from './rule'
 import {Operator} from './operator'
 import {Almanac} from './almanac'
 import { EventEmitter } from 'events'
@@ -50,19 +50,13 @@ export class Engine extends EventEmitter {
    * @param {string} properties.event.params - parameters to pass to the event listener
    * @param {Object} properties.conditions - conditions to evaluate when processing this rule
    */
-    // TODO-Tom: Move this interface to the rule as RuleConstructorOptions | Rule
-    // addRule (properties: {
-    //     conditions: ConditionConstructorOptions,
-    //     event: Action,
-    //     priority?: number | string,
-    // }) {
-    addRule (properties: Rule) {
+    addRule (properties: Rule | RuleConstructorOptions) {
         if (!properties) throw new Error('Engine: addRule() requires options')
         if (!properties.hasOwnProperty('conditions')) throw new Error('Engine: addRule() argument requires "conditions" property')
         if (!properties.hasOwnProperty('event')) throw new Error('Engine: addRule() argument requires "event" property')
 
-        let rule
-        if (properties instanceof (Rule as any)) {
+        let rule: Rule
+        if (properties instanceof Rule) {
             rule = properties
         } else {
             rule = new Rule(properties as any)
