@@ -1,9 +1,9 @@
-import debug0 from 'debug'
+import * as debug0 from 'debug'
 
 const debug = debug0('json-rules-engine')
-import isObjectLike from 'lodash.isobjectlike'
-import Almanac from './almanac'
-import Operator from './operator'
+const isObjectLike = require('lodash.isobjectlike')
+import {Almanac}from './almanac'
+import {Operator} from './operator'
 import {ToJsonAble} from './to-json-able.interface'
 
 export interface ICouldHavePriority {
@@ -29,7 +29,7 @@ export interface BaseCondition extends ICouldHavePriority {
     all?: BaseCondition[]
 }
 
-export default class Condition implements ICouldHavePriority, ToJsonAble {
+export class Condition implements ICouldHavePriority, ToJsonAble {
 
     priority?: number | string
     value: any

@@ -14,7 +14,7 @@ export interface CustomOperator {
     evaluate (factValue: any, jsonValue: any): boolean
 }
 
-export default class Operator implements CustomOperator {
+export class Operator implements CustomOperator {
     cb: (factValue: any, jsonvalue: any) => boolean
     name: string
     factValueValidator: FactValueValidator

@@ -1,8 +1,8 @@
-import hash from 'object-hash'
-import debug from 'debug'
-import deepClone from 'clone'
+import * as hash from 'object-hash'
+import * as debug from 'debug'
+import * as deepClone from 'clone'
 
-import Almanac from './almanac'
+import {Almanac} from './almanac'
 let verbose = debug('json-rules-engine-verbose')
 
 export interface FactOptions {
@@ -10,7 +10,7 @@ export interface FactOptions {
     priority?: number
 }
 
-class Fact {
+export class Fact {
     static CONSTANT = 'CONSTANT'
     static DYNAMIC = 'DYNAMIC'
 
@@ -129,5 +129,3 @@ class Fact {
         }
     }
 }
-
-export default Fact

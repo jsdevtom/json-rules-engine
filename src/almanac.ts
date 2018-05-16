@@ -1,8 +1,8 @@
-import Fact from './fact'
+import {Fact} from './fact'
 import { UndefinedFactError } from './errors'
 
-import selectn from 'selectn'
-import debug0 from 'debug'
+const selectn = require('selectn')
+import * as debug0 from 'debug'
 
 let debug = debug0('json-rules-engine')
 let verbose = debug0('json-rules-engine-verbose')
@@ -16,7 +16,7 @@ export type FactMap = Map<string, Fact>
  * Triggers fact computations and saves the results
  * A new almanac is used for every engine run()
  */
-export default class Almanac {
+export class Almanac {
     factResultsCache: Map<string, any>
     factMap: FactMap
 
@@ -83,7 +83,7 @@ export default class Almanac {
         if (path) {
             return factValuePromise.then(factValue => {
                 if (factValue && isObjectLike(factValue)) {
-                    let pathValue = selectn<Function>(path)!(factValue)
+                    let pathValue = selectn(path)(factValue)
                     debug(
                         `condition::evaluate extracting object property ${path}, received: ${pathValue}`,
                     )

@@ -1,6 +1,6 @@
 import engineFactory from '../src/index'
 import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
+import {Engine} from '../src/engine'
 import {FactOptions} from '../src/fact'
 
 describe('Engine: cache', () => {

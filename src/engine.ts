@@ -1,10 +1,10 @@
-import Fact, {FactOptions} from './fact'
-import Rule, {RuleConstructorOptions} from './rule'
-import Operator from './operator'
-import Almanac from './almanac'
+import {Fact, FactOptions} from './fact'
+import {Rule} from './rule'
+import {Operator} from './operator'
+import {Almanac} from './almanac'
 import { EventEmitter } from 'events'
 import { SuccessEventFact } from './engine-facts'
-import defaultOperators from './engine-default-operators'
+import {defaultOperators} from './engine-default-operators'
 
 let debug = require('debug')('json-rules-engine')
 
@@ -17,7 +17,7 @@ export enum EngineStatus {
     FINISHED = 'FINISHED',
 }
 
-class Engine extends EventEmitter {
+export class Engine extends EventEmitter {
     rules: Rule[]
     allowUndefinedFacts: boolean
     operators: Map<string, Operator>
@@ -281,5 +281,3 @@ class Engine extends EventEmitter {
         })
     }
 }
-
-export default Engine

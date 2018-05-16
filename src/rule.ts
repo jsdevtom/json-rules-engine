@@ -1,9 +1,9 @@
-import Condition, {ConditionConstructorOptions, ICouldHavePriority} from './condition'
-import RuleResult from './rule-result'
-import { EventEmitter } from 'events'
+import {Condition, ConditionConstructorOptions, ICouldHavePriority} from './condition'
+import {RuleResult} from './rule-result'
+import {EventEmitter} from 'events'
 import {Action} from './action.interface'
-import Engine from './engine'
-import Almanac from './almanac'
+import {Engine} from './engine'
+import {Almanac} from './almanac'
 
 let debug = require('debug')('json-rules-engine')
 
@@ -13,7 +13,7 @@ export interface RuleConstructorOptions {
     priority?: number | string,
 }
 
-class Rule extends EventEmitter implements ICouldHavePriority {
+export class Rule extends EventEmitter implements ICouldHavePriority {
 
     priority?: number
     conditions?: Condition
@@ -307,5 +307,3 @@ class Rule extends EventEmitter implements ICouldHavePriority {
         }
     }
 }
-
-export default Rule

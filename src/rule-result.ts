@@ -1,9 +1,9 @@
-import deepClone from 'clone'
-import Condition, {BaseCondition} from './condition'
+import * as deepClone from 'clone'
+import {Condition} from './condition'
 import {Action} from './action.interface'
 import {ToJsonAble} from './to-json-able.interface'
 
-export default class RuleResult implements ToJsonAble {
+export class RuleResult implements ToJsonAble {
     conditions: Condition
     event?: Action
     priority?: string | number | null

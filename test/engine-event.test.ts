@@ -1,8 +1,8 @@
-import engineFactory from '../src/index'
-import Almanac from '../src/almanac'
+import {Almanac} from '../src/almanac'
 
-import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
+import {ruleFactory} from './support/rule-factory'
+import {Engine} from '../src/engine'
+import {engineFactory} from '../src/truegin'
 
 describe('Engine: event', () => {
     let engine: Engine

@@ -1,6 +1,6 @@
-import engineFactory from '../src/index'
 import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
+import {Engine} from '../src/engine'
+import {engineFactory} from '../src/truegin'
 
 describe('Engine: "any" conditions', () => {
     let engine: Engine

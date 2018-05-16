@@ -7,7 +7,7 @@
     "strict": true,
     "sourceMap": true,
     "declaration": true,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": false,
     "suppressImplicitAnyIndexErrors": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -16,15 +16,12 @@
       "node_modules/@types",
       "./src/types"
     ],
-    "baseUrl": "src",
-    "paths": {
-        "actions/*": [ "app/actions/*" ],
-        "selectors/*": [ "app/selectors/*" ],
-        "ui/*": [ "app/ui/*" ],
-        "logger": [ "util/logger" ]
-    }
+    "baseUrl": "./src"
   },
   "include": [
     "src"
-  ]
+  ],
+  "exclude":[
+     "node_modules",
+   ]
 }

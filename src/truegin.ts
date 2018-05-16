@@ -1,9 +1,9 @@
-import Engine, {EngineOptions} from './engine'
-import Fact from './fact'
-import Rule from './rule'
-import Operator from './operator'
+import {Engine, EngineOptions} from './engine'
+import {Fact} from './fact'
+import {Rule} from './rule'
+import {Operator} from './operator'
 
 export { Fact, Rule, Operator, Engine }
-export default function (rules?: Rule[], options?: EngineOptions) {
+export function engineFactory (rules?: Rule[], options?: EngineOptions) {
     return new Engine(rules, options)
 }

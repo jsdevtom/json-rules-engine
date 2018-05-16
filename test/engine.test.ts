@@ -1,6 +1,9 @@
-import engineFactory, { Fact, Rule, Operator } from '../src/index'
 import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
+import {Engine} from '../src/engine'
+import {Rule} from '../src/rule'
+import {Fact} from '../src/fact'
+import {Operator} from '../src/operator'
+import {engineFactory} from '../src/truegin'
 
 describe('Engine', () => {
     let engine: Engine

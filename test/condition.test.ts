@@ -1,7 +1,7 @@
-import Condition from '../src/condition'
-import defaultOperators from '../src/engine-default-operators'
-import Almanac from '../src/almanac'
-import Fact from '../src/fact'
+import {Condition} from '../src/condition'
+import {defaultOperators} from '../src/engine-default-operators'
+import {Almanac} from '../src/almanac'
+import {Fact} from '../src/fact'
 import { conditionFactory } from './support/condition-factory'
 
 let operators = new Map()

@@ -1,5 +1,5 @@
-import { Fact } from '../src/index'
-import Almanac from '../src/almanac'
+import {Fact} from '../src/fact'
+import {Almanac} from '../src/almanac'
 
 describe('Almanac', () => {
     let almanac: Almanac
@@ -12,20 +12,20 @@ describe('Almanac', () => {
         })
 
         test('adds runtime facts', () => {
-            almanac = new Almanac(new Map(), { modelId: 'XYZ' })
+            almanac = new Almanac(new Map(), {modelId: 'XYZ'})
             expect(almanac.factMap.get('modelId')!.value).toBe('XYZ')
         })
     })
 
     describe('constructor', () => {
         test('supports runtime facts as key => values', async () => {
-            almanac = new Almanac(new Map(), { fact1: 3 })
+            almanac = new Almanac(new Map(), {fact1: 3})
             expect(await almanac.factValue('fact1')).toBe(3)
         })
 
         test('supports runtime fact instances', async () => {
             let fact = new Fact('fact1', 3)
-            almanac = new Almanac(new Map(), { fact1: fact })
+            almanac = new Almanac(new Map(), {fact1: fact})
             expect(await almanac.factValue('fact1')).toBe(fact.value)
         })
     })
@@ -46,7 +46,7 @@ describe('Almanac', () => {
         })
 
         test('allows parameters to be passed to the fact', async () => {
-            expect(await almanac.factValue('foo', { userId: 1 })).toBe(1)
+            expect(await almanac.factValue('foo', {userId: 1})).toBe(1)
         })
 
         test('throws an exception if it encounters an undefined fact', async () => {
@@ -95,6 +95,7 @@ describe('Almanac', () => {
             facts.set(fact.id, fact)
             almanac = new Almanac(facts)
         }
+
         let fact: any
         const FACT_VALUE = 2
 
@@ -105,7 +106,7 @@ describe('Almanac', () => {
         })
 
         test('honors facts with caching disabled', (done) => {
-            setup(new Fact('id', 1, { cache: false }))
+            setup(new Fact('id', 1, {cache: false}))
             let promise = almanac._setFactValue(fact, {}, FACT_VALUE)
             expect(almanac.factResultsCache.values().next().value).toBeUndefined()
             promise.then(value => expect(value).toBe(FACT_VALUE)).then(_ => done()).catch(done)
@@ -125,7 +126,7 @@ describe('Almanac', () => {
         }
 
         test('evaluates the fact every time when fact caching is off', () => {
-            setup({ cache: false })
+            setup({cache: false})
             almanac.factValue('foo')
             almanac.factValue('foo')
             almanac.factValue('foo')
@@ -133,7 +134,7 @@ describe('Almanac', () => {
         })
 
         test('evaluates the fact once when fact caching is on', () => {
-            setup({ cache: true })
+            setup({cache: true})
             almanac.factValue('foo')
             almanac.factValue('foo')
             almanac.factValue('foo')
