@@ -1,6 +1,6 @@
-import engineFactory from '../src/index'
-import perfy from 'perfy'
-import deepClone from 'clone'
+import {engineFactory} from '../src/truegin'
+const {performance} = require('perf_hooks')
+import * as deepClone from 'clone'
 import { ruleFactory } from './support/rule-factory'
 
 describe('Performance', () => {
@@ -45,11 +45,13 @@ describe('Performance', () => {
 
     test('performs "any" quickly', async () => {
         let engine = setup(baseConditions)
-        perfy.start('any')
+        const anyStart = performance.now()
         await engine.run()
-        const result = perfy.end('any')
-        expect(result.time).toBeGreaterThan(0.02)
-        expect(result.time).toBeLessThan(0.5)
+        const anyFinish = performance.now()
+        const timeDiffSeconds =  (anyFinish - anyStart) / 1000
+        console.log('timeDiffSeconds: ', timeDiffSeconds)
+        expect(timeDiffSeconds).toBeGreaterThan(0.02)
+        expect(timeDiffSeconds).toBeLessThan(0.5)
     })
 
     test('performs "all" quickly', async () => {
@@ -57,10 +59,11 @@ describe('Performance', () => {
         conditions.all = conditions.any
         delete conditions.any
         let engine = setup(conditions)
-        perfy.start('all')
+        const allStart = performance.now()
         await engine.run()
-        const result = perfy.end('all')
-        expect(result.time).toBeGreaterThan(0.02) // assert lower value
-        expect(result.time).toBeLessThan(0.5)
+        const allFinish = performance.now()
+        const timeDiffSeconds =  (allFinish - allStart) / 1000
+        expect(timeDiffSeconds).toBeGreaterThan(0.02) // assert lower value
+        expect(timeDiffSeconds).toBeLessThan(0.5)
     })
 })

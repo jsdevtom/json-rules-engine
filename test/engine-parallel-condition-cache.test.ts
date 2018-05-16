@@ -1,11 +1,11 @@
-import engineFactory from '../src/index'
-import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
+import {engineFactory} from '../src/truegin'
+import {ruleFactory} from './support/rule-factory'
+import {Engine} from '../src/engine'
 import {FactOptions} from '../src/fact'
 
 describe('Engine', () => {
     let engine: Engine
-    let event = { type: 'early-twenties' }
+    let event = {type: 'early-twenties'}
     let conditions = {
         all: [{
             fact: 'age',
@@ -35,7 +35,7 @@ describe('Engine', () => {
         }
 
         engine = engineFactory()
-        let rule = ruleFactory({ conditions, event })
+        let rule = ruleFactory({conditions, event})
         engine.addRule(rule)
         engine.addFact('age', factDefinition, factOptions)
         engine.on('success', eventSpy)
@@ -43,14 +43,14 @@ describe('Engine', () => {
 
     describe('1 rule with parallel conditions', () => {
         test(
-      'calls the fact definition once for each condition if caching is off',
-      async () => {
-          setup({ cache: false })
-          await engine.run()
-          expect(eventSpy).toHaveBeenCalledTimes(1)
-          expect(factSpy).toHaveBeenCalledTimes(3)
-      },
-    )
+            'calls the fact definition once for each condition if caching is off',
+            async () => {
+                setup({cache: false})
+                await engine.run()
+                expect(eventSpy).toHaveBeenCalledTimes(1)
+                expect(factSpy).toHaveBeenCalledTimes(3)
+            },
+        )
 
         test('calls the fact definition once', async () => {
             setup()
@@ -70,7 +70,7 @@ describe('Engine', () => {
                     value: [21, 22],
                 }],
             }
-            let rule = ruleFactory({ conditions, event })
+            let rule = ruleFactory({conditions, event})
             engine.addRule(rule)
 
             await engine.run()

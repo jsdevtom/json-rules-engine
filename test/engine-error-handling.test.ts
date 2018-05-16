@@ -1,11 +1,11 @@
-import engineFactory from '../src/index'
-import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
+import {engineFactory} from '../src/truegin'
+import {ruleFactory} from './support/rule-factory'
+import {Engine} from '../src/engine'
 
 describe('Engine: failure', () => {
     let engine: Engine
 
-    let event = { type: 'generic' }
+    let event = {type: 'generic'}
     let conditions = {
         any: [{
             fact: 'age',
@@ -15,7 +15,7 @@ describe('Engine: failure', () => {
     }
     beforeEach(() => {
         engine = engineFactory()
-        let determineDrinkingAgeRule = ruleFactory({ conditions, event })
+        let determineDrinkingAgeRule = ruleFactory({conditions, event})
         engine.addRule(determineDrinkingAgeRule)
         engine.addFact('age', function () {
             throw new Error('problem occurred')

@@ -1,12 +1,12 @@
-import { Operator } from '../src/index'
+import {Operator} from '../src/truegin'
 import {FactValueValidator} from '../src/operator'
 
 describe('Operator', () => {
     describe('constructor()', () => {
         function subject (
-          name?: string,
-          cb?: (factValue: any, jsonvalue: any) => boolean,
-          factValueValidator?: FactValueValidator,
+            name?: string,
+            cb?: (factValue: any, jsonvalue: any) => boolean,
+            factValueValidator?: FactValueValidator,
         ) {
             return new Operator(name!, cb!, factValueValidator)
         }

@@ -1,7 +1,7 @@
-import engineFactory from '../src/index'
+import {engineFactory} from '../src/truegin'
 
-import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
+import {ruleFactory} from './support/rule-factory'
+import {Engine} from '../src/engine'
 
 describe('Engine: failure', () => {
     let engine: Engine

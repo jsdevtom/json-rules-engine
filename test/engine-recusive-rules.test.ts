@@ -1,10 +1,10 @@
-import engineFactory from '../src/index'
-import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
+import {engineFactory} from '../src/truegin'
+import {ruleFactory} from './support/rule-factory'
+import {Engine} from '../src/engine'
 
 describe('Engine: recursive rules', () => {
     let engine: Engine
-    let event = { type: 'middle-income-adult' }
+    let event = {type: 'middle-income-adult'}
     let nestedAnyCondition = {
         all: [
             {
@@ -35,11 +35,12 @@ describe('Engine: recursive rules', () => {
     }
 
     let eventSpy = jest.fn()
+
     function setup (conditions = nestedAnyCondition) {
         eventSpy = jest.fn()
 
         engine = engineFactory()
-        let rule = ruleFactory({ conditions, event })
+        let rule = ruleFactory({conditions, event})
         engine.addRule(rule)
         engine.on('success', eventSpy)
     }

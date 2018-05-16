@@ -1,12 +1,12 @@
-import engineFactory, { Fact } from '../src/index'
+import {engineFactory, Fact} from '../src/truegin'
 
-import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
-import Almanac from '../src/almanac'
+import {ruleFactory} from './support/rule-factory'
+import {Engine} from '../src/engine'
+import {Almanac} from '../src/almanac'
 
 describe('Engine: custom cache keys', () => {
     let engine: Engine
-    let event = { type: 'early-twenties' }
+    let event = {type: 'early-twenties'}
     let conditions = {
         all: [{
             fact: 'demographics',
@@ -50,7 +50,7 @@ describe('Engine: custom cache keys', () => {
         let demographicsDataFact = new Fact('demographic-data', demographicsDataDefinition)
 
         engine = engineFactory()
-        let rule = ruleFactory({ conditions, event })
+        let rule = ruleFactory({conditions, event})
         engine.addRule(rule)
         engine.addFact(demographicsFact)
         engine.addFact(demographicsDataFact)
@@ -78,7 +78,7 @@ describe('Engine: custom cache keys', () => {
                     value: 20,
                 }],
             }
-            let rule = ruleFactory({ conditions, event })
+            let rule = ruleFactory({conditions, event})
             engine.addRule(rule)
 
             await engine.run()

@@ -1,5 +1,4 @@
-import { Fact } from '../src/index'
-import {FactOptions} from '../src/fact'
+import {FactOptions, Fact} from '../src/fact'
 
 describe('Fact', () => {
     function subject (id?: string, definition?: any, options?: FactOptions) {

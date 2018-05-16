@@ -1,7 +1,7 @@
-import engineFactory from '../src/index'
+import {engineFactory} from '../src/truegin'
 
-import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
+import {ruleFactory} from './support/rule-factory'
+import {Engine} from '../src/engine'
 import {ConditionConstructorOptions} from '../src/condition'
 
 describe('Engine: fact to fact comparison', () => {
@@ -9,10 +9,10 @@ describe('Engine: fact to fact comparison', () => {
     let eventSpy = jest.fn()
 
     function setup (conditions: ConditionConstructorOptions) {
-        let event = { type: 'success-event' }
+        let event = {type: 'success-event'}
         eventSpy = jest.fn()
         engine = engineFactory()
-        let rule = ruleFactory({ conditions, event })
+        let rule = ruleFactory({conditions, event})
         engine.addRule(rule)
         engine.on('success', eventSpy)
     }
@@ -29,12 +29,12 @@ describe('Engine: fact to fact comparison', () => {
         }
         test('allows a fact to retrieve other fact values', async () => {
             setup(constantCondition)
-            await engine.run({ height: 1, width: 2 })
+            await engine.run({height: 1, width: 2})
             expect(eventSpy).toHaveBeenCalledTimes(1)
 
             eventSpy = jest.fn()
 
-            await engine.run({ height: 2, width: 1 }) // negative case
+            await engine.run({height: 2, width: 1}) // negative case
             expect(eventSpy.mock.calls.length).toBe(0)
         })
     })
@@ -65,12 +65,12 @@ describe('Engine: fact to fact comparison', () => {
                 let width = await almanac.factValue('width')
                 return params.multiplier * width
             })
-            await engine.run({ height: 5, width: 10 })
+            await engine.run({height: 5, width: 10})
             expect(eventSpy).toHaveBeenCalledTimes(1)
 
             eventSpy = jest.fn()
 
-            await engine.run({ height: 5, width: 9 }) // negative case
+            await engine.run({height: 5, width: 9}) // negative case
             expect(eventSpy.mock.calls.length).toBe(0)
         })
     })
@@ -97,18 +97,18 @@ describe('Engine: fact to fact comparison', () => {
             setup(pathCondition)
             engine.addFact('heightMultiplier', async (params: any, almanac: any) => {
                 let height = await almanac.factValue('height')
-                return { meters: params.multiplier * height }
+                return {meters: params.multiplier * height}
             })
             engine.addFact('widthMultiplier', async (params: any, almanac: any) => {
                 let width = await almanac.factValue('width')
-                return { feet: params.multiplier * width }
+                return {feet: params.multiplier * width}
             })
-            await engine.run({ height: 5, width: 10 })
+            await engine.run({height: 5, width: 10})
             expect(eventSpy).toHaveBeenCalledTimes(1)
 
             eventSpy = jest.fn()
 
-            await engine.run({ height: 5, width: 9 }) // negative case
+            await engine.run({height: 5, width: 9}) // negative case
             expect(eventSpy.mock.calls.length).toBe(0)
         })
     })

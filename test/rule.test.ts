@@ -1,10 +1,11 @@
-import Engine from '../src/index'
-import Rule from '../src/rule'
+import {Engine} from '../src/engine'
+import {Rule} from '../src/rule'
 
 import { conditionFactory } from './support/condition-factory'
+import {Condition} from '../src/condition'
 
 describe('Rule', () => {
-    let rule = new Rule()
+    let rule = new (Rule as any)()
     let conditionBase = conditionFactory({
         fact: 'age',
         value: 50,
@@ -14,7 +15,7 @@ describe('Rule', () => {
         test('can be initialized with priority, conditions, and event', () => {
             let condition = {
                 all: [Object.assign({}, conditionBase)],
-            }
+            } as Condition
             condition.operator = 'all'
             condition.priority = 25
             let opts = {
@@ -33,7 +34,7 @@ describe('Rule', () => {
         test('it can be initialized with a json string', () => {
             let condition = {
                 all: [Object.assign({}, conditionBase)],
-            }
+            } as Condition
             condition.operator = 'all'
             condition.priority = 25
             let opts = {
@@ -53,7 +54,7 @@ describe('Rule', () => {
 
     describe('event emissions', () => {
         test('can emit', () => {
-            let rule = new Rule()
+            let rule = new (Rule as any)()
             let successSpy = jest.fn()
             rule.on('test', successSpy)
             rule.emit('test')
@@ -62,21 +63,21 @@ describe('Rule', () => {
 
         test('can be initialized with an onSuccess option', done => {
             let event = { type: 'test' }
-            let onSuccess = function (e) {
+            let onSuccess = function (e: any) {
                 expect(e).toBe(event)
                 done()
             }
-            let rule = new Rule({ onSuccess })
+            let rule = new Rule({ onSuccess } as any)
             rule.emit('success', event)
         })
 
         test('can be initialized with an onFailure option', done => {
             let event = { type: 'test' }
-            let onFailure = function (e) {
+            let onFailure = function (e: any) {
                 expect(e).toBe(event)
                 done()
             }
-            let rule = new Rule({ onFailure })
+            let rule = new Rule({ onFailure } as any)
             rule.emit('failure', event)
         })
     })
@@ -174,7 +175,7 @@ describe('Rule', () => {
         },
         { priority: 100 },
       )
-            let rule = new Rule()
+            let rule = new (Rule as any)()
             rule.setEngine(engine)
 
             let prioritizedConditions = rule.prioritizeConditions(conditions)
@@ -190,7 +191,7 @@ describe('Rule', () => {
         test('evalutes truthy when there are no conditions', async () => {
             let eventSpy = jest.fn()
             let engine = new Engine()
-            let rule = new Rule()
+            let rule = new (Rule as any)()
             rule.setConditions({
                 all: [],
             })
@@ -221,16 +222,16 @@ describe('Rule', () => {
                 },
             ],
         }
-        let rule
+        let rule: Rule
         beforeEach(() => {
-            rule = new Rule()
+            rule = new (Rule as any)()
             rule.setConditions(conditions)
             rule.setPriority(priority)
             rule.setEvent(event)
         })
 
         test('serializes itself', () => {
-            let json = rule.toJSON(false)
+            let json = rule.toJSON(false) as any
             expect(Object.keys(json).length).toBe(3)
             expect(json.conditions).toEqual(conditions)
             expect(json.priority).toEqual(priority)
@@ -238,7 +239,7 @@ describe('Rule', () => {
         })
 
         test('serializes itself as json', () => {
-            let jsonString = rule.toJSON()
+            let jsonString = rule.toJSON() as string
             expect(typeof jsonString).toBe('string')
             let json = JSON.parse(jsonString)
             expect(Object.keys(json).length).toBe(3)
@@ -248,7 +249,7 @@ describe('Rule', () => {
         })
 
         test('rehydrates itself using a JSON string', () => {
-            let jsonString = rule.toJSON()
+            let jsonString = rule.toJSON() as string
             expect(typeof jsonString).toBe('string')
             let hydratedRule = new Rule(jsonString)
             expect(hydratedRule.conditions).toEqual(rule.conditions)
@@ -257,7 +258,7 @@ describe('Rule', () => {
         })
 
         test('rehydrates itself using an object from JSON.parse()', () => {
-            let jsonString = rule.toJSON()
+            let jsonString = rule.toJSON() as string
             expect(typeof jsonString).toBe('string')
             let json = JSON.parse(jsonString)
             let hydratedRule = new Rule(json)

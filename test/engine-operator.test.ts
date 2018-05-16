@@ -1,5 +1,5 @@
-import engineFactory from '../src/index'
-import { ruleFactory } from './support/rule-factory'
+import {engineFactory} from '../src/truegin'
+import {ruleFactory} from './support/rule-factory'
 import {BaseCondition} from '../src/condition'
 
 async function dictionary (params: any) {
@@ -22,10 +22,11 @@ describe('Engine: operator', () => {
         }],
     } as any
     let eventSpy = jest.fn()
+
     function setup (conditions = baseConditions) {
         eventSpy = jest.fn()
         let engine = engineFactory()
-        let rule = ruleFactory({ conditions, event })
+        let rule = ruleFactory({conditions, event})
         engine.addRule(rule)
         engine.addOperator('startsWithLetter', (factValue, jsonValue) => {
             if (!factValue.length) return false

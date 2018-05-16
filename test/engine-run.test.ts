@@ -1,15 +1,15 @@
-import engineFactory from '../src/index'
+import {engineFactory} from '../src/truegin'
 
-import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
-import Rule from '../src/rule'
+import {ruleFactory} from './support/rule-factory'
+import {Engine} from '../src/engine'
+import {Rule} from '../src/rule'
 
 describe('Engine: run', () => {
     let engine: Engine
     let rule: Rule
     let rule2: Rule
 
-    let event = { type: 'generic' }
+    let event = {type: 'generic'}
     let condition21 = {
         any: [{
             fact: 'age',
@@ -29,9 +29,9 @@ describe('Engine: run', () => {
     beforeEach(() => {
         eventSpy = jest.fn()
         engine = engineFactory()
-        rule = ruleFactory({ conditions: condition21, event })
+        rule = ruleFactory({conditions: condition21, event})
         engine.addRule(rule)
-        rule2 = ruleFactory({ conditions: condition75, event })
+        rule2 = ruleFactory({conditions: condition75, event})
         engine.addRule(rule2)
         engine.on('success', eventSpy)
     })
@@ -43,22 +43,22 @@ describe('Engine: run', () => {
         })
 
         test(
-      'allows runtime facts to override engine facts for a single run()',
-      async () => {
-          engine.addFact('age', 30)
+            'allows runtime facts to override engine facts for a single run()',
+            async () => {
+                engine.addFact('age', 30)
 
-          await engine.run({ age: 85 }) // override 'age' with runtime fact
-          expect(eventSpy.mock.calls.length === 2)
+                await engine.run({age: 85}) // override 'age' with runtime fact
+                expect(eventSpy.mock.calls.length === 2)
 
-          eventSpy = jest.fn()
-          await engine.run() // no runtime fact; revert to age: 30
-          expect(eventSpy.mock.calls.length === 1)
+                eventSpy = jest.fn()
+                await engine.run() // no runtime fact; revert to age: 30
+                expect(eventSpy.mock.calls.length === 1)
 
-          eventSpy = jest.fn()
-          await engine.run({ age: 2 }) // override 'age' with runtime fact
-          expect(eventSpy.mock.calls.length).toBe(0)
-      },
-    )
+                eventSpy = jest.fn()
+                await engine.run({age: 2}) // override 'age' with runtime fact
+                expect(eventSpy.mock.calls.length).toBe(0)
+            },
+        )
     })
 
     describe('returns', () => {

@@ -1,6 +1,6 @@
-import engineFactory from '../src/index'
-import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
+import {engineFactory} from '../src/truegin'
+import {ruleFactory} from './support/rule-factory'
+import {Engine} from '../src/engine'
 import {ConditionConstructorOptions} from '../src/condition'
 
 const CHILD = 14
@@ -25,14 +25,14 @@ async function eligibilityData (params: any) {
         zip: '80403',
         'dot.property': 'dot-property-value',
         occupantHistory: [
-      { name: 'Joe', year: 2011 },
-      { name: 'Jane', year: 2013 },
+            {name: 'Joe', year: 2011},
+            {name: 'Jane', year: 2013},
         ],
     }
     if (params.eligibilityId === 1) {
-        return { age: CHILD, address }
+        return {age: CHILD, address}
     }
-    return { age: ADULT, address }
+    return {age: ADULT, address}
 }
 
 describe('Engine: fact evaluation', () => {
@@ -43,6 +43,7 @@ describe('Engine: fact evaluation', () => {
             demographic: 'under50',
         },
     }
+
     function baseConditions (): any {
         return {
             any: [{
@@ -56,6 +57,7 @@ describe('Engine: fact evaluation', () => {
             }],
         }
     }
+
     let successSpy = jest.fn()
     let failureSpy = jest.fn()
     beforeEach(() => {
@@ -65,7 +67,7 @@ describe('Engine: fact evaluation', () => {
 
     function setup (conditions = baseConditions(), engineOptions = {}) {
         engine = engineFactory([], engineOptions)
-        let rule = ruleFactory({ conditions, event })
+        let rule = ruleFactory({conditions, event})
         engine.addRule(rule)
         engine.addFact('eligibilityField', eligibilityField)
         engine.addFact('eligibilityData', eligibilityData)
@@ -87,36 +89,36 @@ describe('Engine: fact evaluation', () => {
             })
 
             describe(
-        'treats undefined facts as falsey when allowUndefinedFacts is set',
-        () => {
-            test('emits "success" when the condition succeeds', async () => {
-                let conditions = Object.assign({}, baseConditions())
-                conditions.any.push({
-                    fact: 'undefined-fact',
-                    operator: 'equal',
-                    value: true,
-                })
-                setup(conditions, { allowUndefinedFacts: true })
-                await engine.run()
-                expect(successSpy.mock.calls.length)
-                expect(!successSpy.mock.calls.length)
-            })
+                'treats undefined facts as falsey when allowUndefinedFacts is set',
+                () => {
+                    test('emits "success" when the condition succeeds', async () => {
+                        let conditions = Object.assign({}, baseConditions())
+                        conditions.any.push({
+                            fact: 'undefined-fact',
+                            operator: 'equal',
+                            value: true,
+                        })
+                        setup(conditions, {allowUndefinedFacts: true})
+                        await engine.run()
+                        expect(successSpy.mock.calls.length)
+                        expect(!successSpy.mock.calls.length)
+                    })
 
-            test('emits "failure" when the condition fails', async () => {
-                let conditions = Object.assign({}, baseConditions())
-                conditions.any.push({
-                    fact: 'undefined-fact',
-                    operator: 'equal',
-                    value: true,
-                })
-                conditions.any[0].params.eligibilityId = 2
-                setup(conditions, { allowUndefinedFacts: true })
-                await engine.run()
-                expect(!successSpy.mock.calls.length)
-                expect(failureSpy.mock.calls.length)
-            })
-        },
-      )
+                    test('emits "failure" when the condition fails', async () => {
+                        let conditions = Object.assign({}, baseConditions())
+                        conditions.any.push({
+                            fact: 'undefined-fact',
+                            operator: 'equal',
+                            value: true,
+                        })
+                        conditions.any[0].params.eligibilityId = 2
+                        setup(conditions, {allowUndefinedFacts: true})
+                        await engine.run()
+                        expect(!successSpy.mock.calls.length)
+                        expect(failureSpy.mock.calls.length)
+                    })
+                },
+            )
         })
     })
 
@@ -150,6 +152,7 @@ describe('Engine: fact evaluation', () => {
                 }],
             }
         }
+
         test('emits when the condition is met', async () => {
             setup(conditions())
             await engine.run()
@@ -166,17 +169,17 @@ describe('Engine: fact evaluation', () => {
 
         describe('complex paths', () => {
             test(
-        'correctly interprets "path" when dynamic facts return objects',
-        async () => {
-            let complexCondition = conditions()
-            ;(complexCondition as any).any[0].path = '.address.occupantHistory[0].year'
-            ;(complexCondition as any).any[0].value = 2011
-            ;(complexCondition as any).any[0].operator = 'equal'
-            setup(complexCondition)
-            await engine.run()
-            expect(successSpy.mock.calls[0][0]).toEqual(event)
-        },
-      )
+                'correctly interprets "path" when dynamic facts return objects',
+                async () => {
+                    let complexCondition = conditions()
+                    ;(complexCondition as any).any[0].path = '.address.occupantHistory[0].year'
+                    ;(complexCondition as any).any[0].value = 2011
+                    ;(complexCondition as any).any[0].operator = 'equal'
+                    setup(complexCondition)
+                    await engine.run()
+                    expect(successSpy.mock.calls[0][0]).toEqual(event)
+                },
+            )
 
             test(
                 'correctly interprets "path" when target object properties have dots',
@@ -192,7 +195,7 @@ describe('Engine: fact evaluation', () => {
             )
 
             test('correctly interprets "path" with runtime fact objects', async () => {
-                let fact = { x: { y: 1 }, a: 2 }
+                let fact = {x: {y: 1}, a: 2}
                 let conditions = {
                     all: [{
                         fact: 'x',
@@ -206,7 +209,7 @@ describe('Engine: fact evaluation', () => {
                 }
 
                 engine = engineFactory([])
-                let rule = ruleFactory({ conditions, event })
+                let rule = ruleFactory({conditions, event})
                 engine.addRule(rule)
                 engine.on('success', successSpy)
                 engine.on('failure', failureSpy)

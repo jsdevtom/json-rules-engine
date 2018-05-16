@@ -1,12 +1,11 @@
-import engineFactory from '../src/index'
-
-import { ruleFactory } from './support/rule-factory'
-import Engine from '../src/engine'
+import {engineFactory} from '../src/truegin'
+import {ruleFactory} from './support/rule-factory'
+import {Engine} from '../src/engine'
 import {ConditionConstructorOptions} from '../src/condition'
 
 describe('Engine: fact priority', () => {
     let engine: Engine
-    let event = { type: 'adult-human-admins' }
+    let event = {type: 'adult-human-admins'}
 
     let eventSpy = jest.fn()
     let ageStub = jest.fn()
@@ -25,7 +24,7 @@ describe('Engine: fact priority', () => {
                 value: 18,
             }],
         }
-        let rule = ruleFactory({ conditions, event, priority: 100 })
+        let rule = ruleFactory({conditions, event, priority: 100})
         engine.addRule(rule)
 
         conditions = {
@@ -35,11 +34,11 @@ describe('Engine: fact priority', () => {
                 value: 'human',
             }],
         }
-        rule = ruleFactory({ conditions, event })
+        rule = ruleFactory({conditions, event})
         engine.addRule(rule)
 
-        engine.addFact('age', ageStub, { priority: 100 })
-        engine.addFact('segment', segmentStub, { priority: 50 })
+        engine.addFact('age', ageStub, {priority: 100})
+        engine.addFact('segment', segmentStub, {priority: 50})
     }
 
     describe('stop()', () => {

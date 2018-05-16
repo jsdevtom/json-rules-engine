@@ -1,4 +1,4 @@
-import engineFactory, { Fact, Rule } from '../src/index'
+import {Engine, engineFactory, Fact, Rule} from '../src/truegin'
 import { ruleFactory } from './support/rule-factory'
 
 describe('Engine: custom properties', () => {
@@ -43,8 +43,8 @@ describe('Engine: custom properties', () => {
                 }
                 let rule = ruleFactory({ conditions, event })
                 engine.addRule(rule)
-                expect(engine.rules[0].conditions!['all'][0]).toHaveProperty('customId')
-                expect(engine.rules[0].conditions!['all'][0].customId).toBe('uuid')
+                expect(engine.rules[0].conditions!['all']![0]).toHaveProperty('customId')
+                expect((engine.rules[0].conditions!['all']![0] as any).customId).toBe('uuid')
             })
         })
 
