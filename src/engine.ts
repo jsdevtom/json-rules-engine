@@ -5,6 +5,7 @@ import {Almanac} from './almanac'
 import { EventEmitter } from 'events'
 import { SuccessEventFact } from './engine-facts'
 import {defaultOperators} from './engine-default-operators'
+import {Action} from './action.interface'
 
 let debug = require('debug')('json-rules-engine')
 
@@ -244,7 +245,7 @@ export class Engine extends EventEmitter {
    * @param  {Object} runOptions - run options
    * @return {Promise} resolves when the engine has completed running
    */
-    run (runtimeFacts = {}) {
+    run (runtimeFacts = {}): Promise<Action[]> {
         debug(`engine::run started`)
         debug(`engine::run runtimeFacts:`, runtimeFacts)
         runtimeFacts['success-events'] = new Fact('success-events', SuccessEventFact(), { cache: false })
