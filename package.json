@@ -3,8 +3,8 @@
   "version": "4.0.2",
   "description": "",
   "keywords": [],
-  "main": "dist/truegin.umd.js",
-  "module": "dist/truegin.es5.js",
+  "main": "dist/lib/truegin.js",
+  "module": "dist/lib/truegin.js",
   "typings": "dist/lib/truegin.d.ts",
   "files": [
     "dist"
