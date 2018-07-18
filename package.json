@@ -5,7 +5,7 @@
   "keywords": [],
   "main": "dist/truegin.umd.js",
   "module": "dist/truegin.es5.js",
-  "typings": "dist/types/truegin.d.ts",
+  "typings": "dist/lib/truegin.d.ts",
   "files": [
     "dist"
   ],
