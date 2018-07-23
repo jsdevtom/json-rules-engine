@@ -1,5 +1,7 @@
 We're really glad you're reading this, because we need volunteer developers to help this project come to fruition. 👏
 
+This repo uses [commitizen](https://github.com/commitizen/cz-cli#commitizen-for-contributors) to allow simpler contribution.
+
 ## Instructions
 
 These steps will guide you through contributing to this project:
