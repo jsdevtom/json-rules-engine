@@ -14,4 +14,4 @@ Keep in mind that after running `npm install` the git repo is reset. So a good w
 
 Make your changes and commit them with `npm run commit`. Make sure the commands npm run build and npm run test:prod are working.
 
-Finally send a [GitHub Pull Request](https://github.com/alexjoverm/typescript-library-starter/compare?expand=1) with a clear list of what you've done (read more [about pull requests](https://help.github.com/articles/about-pull-requests/)). Make sure all of your commits are atomic (one feature per commit).
+Finally send a [GitHub Pull Request](https://github.com/jsdevtom/truegin/compare?expand=1) with a clear list of what you've done (read more [about pull requests](https://help.github.com/articles/about-pull-requests/)). Make sure all of your commits are atomic (one feature per commit).
